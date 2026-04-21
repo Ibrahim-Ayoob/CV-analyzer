@@ -62,3 +62,16 @@ def remove_stopwords(tokens):
             filtered.append(word)
 
     return filtered
+
+def word_frequency(tokens):
+
+    freq = {}
+
+    for word in tokens:
+
+        if word in freq:
+            freq[word] += 1
+        else:
+            freq[word] = 1
+
+    return freq
