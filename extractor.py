@@ -47,3 +47,18 @@ def tokenize(text):
         tokens.append(word)
 
     return tokens
+
+def remove_stopwords(tokens):
+
+    stopwords = [
+        "the","and","is","a","to","in","of","for","on","with","at","by",
+        "an","be","this","that","from","or","as","are"
+    ]
+
+    filtered = []
+
+    for word in tokens:
+        if word not in stopwords:
+            filtered.append(word)
+
+    return filtered
