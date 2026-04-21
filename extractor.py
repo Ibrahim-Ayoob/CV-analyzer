@@ -189,3 +189,42 @@ def classify_resume_length(tokens):
 
     else:
         return "Long"
+    
+
+    def extract_text(filepath):
+
+    raw_text = read_pdf(filepath)
+
+    cleaned_text = clean_text(raw_text)
+
+    tokens = tokenize(cleaned_text)
+
+    filtered_tokens = remove_stopwords(tokens)
+
+    freq = word_frequency(filtered_tokens)
+
+    emails = extract_emails(tokens)
+
+    phones = extract_phones(tokens)
+
+    links = extract_links(tokens)
+
+    sections = detect_sections(cleaned_text)
+
+    language = detect_language(cleaned_text)
+
+    resume_length = classify_resume_length(tokens)
+
+    result = {
+        "clean_text": cleaned_text,
+        "tokens": filtered_tokens,
+        "word_frequency": freq,
+        "emails": emails,
+        "phones": phones,
+        "links": links,
+        "sections": sections,
+        "language": language,
+        "resume_length": resume_length
+    }
+
+    return result
