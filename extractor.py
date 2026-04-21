@@ -87,3 +87,21 @@ def extract_emails(tokens):
             emails.append(word)
 
     return emails
+
+
+def extract_phones(tokens):
+
+    phones = []
+
+    for word in tokens:
+
+        digits = ""
+
+        for char in word:
+            if char.isdigit():
+                digits += char
+
+        if len(digits) >= 10 and len(digits) <= 15:
+            phones.append(digits)
+
+    return phones
