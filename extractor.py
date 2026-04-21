@@ -105,3 +105,27 @@ def extract_phones(tokens):
             phones.append(digits)
 
     return phones
+
+
+def extract_links(tokens):
+
+    links = []
+
+    for word in tokens:
+
+        if "http://" in word:
+            links.append(word)
+
+        elif "https://" in word:
+            links.append(word)
+
+        elif "www." in word:
+            links.append(word)
+
+        elif "linkedin.com" in word:
+            links.append(word)
+
+        elif "github.com" in word:
+            links.append(word)
+
+    return links
