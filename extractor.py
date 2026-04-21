@@ -174,3 +174,18 @@ def detect_language(text):
 
     else:
         return "Mixed"
+
+
+
+def classify_resume_length(tokens):
+
+    word_count = len(tokens)
+
+    if word_count < 200:
+        return "Short"
+
+    elif word_count <= 600:
+        return "Normal"
+
+    else:
+        return "Long"
