@@ -75,3 +75,15 @@ def word_frequency(tokens):
             freq[word] = 1
 
     return freq
+
+
+def extract_emails(tokens):
+
+    emails = []
+
+    for word in tokens:
+
+        if "@" in word and "." in word:
+            emails.append(word)
+
+    return emails
