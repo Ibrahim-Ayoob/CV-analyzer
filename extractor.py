@@ -129,3 +129,24 @@ def extract_links(tokens):
             links.append(word)
 
     return links
+
+
+
+def detect_sections(text):
+
+    section_keywords = [
+        "education",
+        "experience",
+        "skills",
+        "projects",
+        "certifications"
+    ]
+
+    found = []
+
+    for section in section_keywords:
+
+        if section in text:
+            found.append(section)
+
+    return found
