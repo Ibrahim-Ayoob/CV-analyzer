@@ -150,3 +150,27 @@ def detect_sections(text):
             found.append(section)
 
     return found
+
+
+
+def detect_language(text):
+
+    arabic_count = 0
+    english_count = 0
+
+    for char in text:
+
+        if '\u0600' <= char <= '\u06FF':
+            arabic_count += 1
+
+        elif 'a' <= char <= 'z':
+            english_count += 1
+
+    if arabic_count > english_count:
+        return "Arabic"
+
+    elif english_count > arabic_count:
+        return "English"
+
+    else:
+        return "Mixed"
