@@ -36,3 +36,14 @@ def clean_text(text):
                 previous_space = False
 
     return cleaned
+
+def tokenize(text):
+
+    words = text.split()
+
+    tokens = []
+
+    for word in words:
+        tokens.append(word)
+
+    return tokens
