@@ -14,3 +14,25 @@ def read_pdf(filepath):
                 text += page_text + "\n"
 
     return text
+
+def clean_text(text):
+
+    cleaned = ""
+    previous_space = False
+
+    for char in text:
+
+        if 'A' <= char <= 'Z':
+            char = chr(ord(char) + 32)
+
+        if char.isalnum() or char in [' ', '\n', '@', '.', '/', ':']:
+
+            if char == " ":
+                if not previous_space:
+                    cleaned += char
+                previous_space = True
+            else:
+                cleaned += char
+                previous_space = False
+
+    return cleaned
