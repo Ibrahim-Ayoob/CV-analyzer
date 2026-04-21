@@ -191,7 +191,7 @@ def classify_resume_length(tokens):
         return "Long"
     
 
-    def extract_text(filepath):
+def extract_text(filepath):
 
     raw_text = read_pdf(filepath)
 
