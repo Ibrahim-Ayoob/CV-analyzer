@@ -27,7 +27,9 @@ def home():
 @app.route("/upload", methods=["POST"])
 def upload_file():
 
-    # 1. Validate request
+    # ==============================
+    # 📥 STEP 1: VALIDATE REQUEST
+    # ==============================
     if "resume" not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
 
@@ -36,21 +38,25 @@ def upload_file():
     if file.filename == "":
         return jsonify({"error": "Empty filename"}), 400
 
-    # 2. Save file
+    # ==============================
+    # 💾 STEP 2: SAVE FILE
+    # ==============================
     filepath = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(filepath)
 
     try:
         # ==============================
-        # 📄 STEP 1: EXTRACT TEXT
+        # 📄 STEP 3: EXTRACT TEXT
         # ==============================
         extraction_result = extract_text(filepath)
 
-        # 🔹 depends on your extraction output
         cv_text = extraction_result.get("clean_text", "")
 
+        if not cv_text:
+            return jsonify({"error": "Could not extract text"}), 500
+
         # ==============================
-        # 🧠 STEP 2: ANALYSIS
+        # 🧠 STEP 4: ANALYSIS
         # ==============================
         keywords = [
             "python", "java", "sql", "machine learning",
@@ -72,7 +78,7 @@ def upload_file():
         )
 
         # ==============================
-        # 📤 STEP 3: RESPONSE
+        # 📤 STEP 5: RESPONSE
         # ==============================
         return jsonify({
             "score": score,
@@ -80,12 +86,13 @@ def upload_file():
             "missing_keywords": missing_keywords,
             "found_sections": found_sections,
             "missing_sections": missing_sections,
-            "suggestions": suggestions
+            "suggestions": suggestions,
+            "preview": cv_text[:500]  # 🔥 first 500 chars (optional)
         })
 
     except Exception as e:
+        print("ERROR:", e)  # 🔥 important for debugging
         return jsonify({"error": str(e)}), 500
-
 
 # ==============================
 # ▶️ RUN
