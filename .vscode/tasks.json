@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run CV Analyzer Backend",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/app.py"],
+      "problemMatcher": ["$python"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Start the Flask backend for the CV Analyzer"
+    }
+  ]
+}
