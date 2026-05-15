@@ -58,3 +58,41 @@ else:
 ALLOWED = {"pdf", "docx", "doc", "txt"}
 MAX_MB  = 10 * 1024 * 1024
 
+# ── File helpers ───────────────────────────────────────────────────────────
+def ok_file(name):
+    return "." in name and name.rsplit(".", 1)[1].lower() in ALLOWED
+
+def read_pdf(path):
+    if not PDF_AVAILABLE:
+        return None, "PyPDF2 not installed"
+    try:
+        txt = ""
+        with open(path, "rb") as f:
+            for page in PyPDF2.PdfReader(f).pages:
+                txt += page.extract_text() or ""
+        return txt.strip(), None
+    except Exception as e:
+        return None, str(e)
+
+def read_docx(path):
+    if not DOCX_AVAILABLE:
+        return None, "python-docx not installed"
+    try:
+        doc = Document(path)
+        txt = "\n".join(p.text for p in doc.paragraphs if p.text.strip())
+        return txt.strip(), None
+    except Exception as e:
+        return None, str(e)
+
+def read_txt(path):
+    try:
+        return open(path, encoding="utf-8", errors="ignore").read().strip(), None
+    except Exception as e:
+        return None, str(e)
+
+def extract(path, filename):
+    ext = filename.rsplit(".", 1)[1].lower()
+    if ext == "pdf":           return read_pdf(path)
+    if ext in ("docx","doc"):  return read_docx(path)
+    if ext == "txt":           return read_txt(path)
+    return None, "Unsupported format"
