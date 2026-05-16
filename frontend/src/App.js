@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import './App.css';
-import CVBuilder from './builder/CVBuilder';
+import CVBuilder from '../builder/CVBuilder';
 
 // ── Point this at your Flask server ───────────────────────────────────────
 const API_BASE = "http://localhost:8080";
