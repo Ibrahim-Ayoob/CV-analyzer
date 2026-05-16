@@ -69,4 +69,3 @@ test('clicking Back returns to home', () => {
   fireEvent.click(screen.getByText(/← Back/i));
   expect(screen.getByText(/Analyze My CV/i)).toBeInTheDocument();
 });
-d
